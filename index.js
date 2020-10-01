@@ -58,7 +58,7 @@ function buy(upgradeID){
 }
 
 function expenseCalc(){
-    return ((taxesCalc() * (improvements.overseerEffect - (upgrades.overseers / 100)) + upgrades.workerExpense + upgrades.overseerExpense)) / 60
+    return ((taxesCalc() + upgrades.workerExpense + upgrades.overseerExpense)) / 60
 }
 
 function moneyCalc(){
@@ -67,7 +67,7 @@ function moneyCalc(){
 
 function taxesCalc(){
     if(money <= 1) return 0;
-    else return 1 + (Math.log(money) / 8) * (1 + (money / 1000))
+    else return 1 + ((Math.log(money) / 8) * (1 + (money / 1000))) * (1 - (upgrades.overseers * improvements.overseerEffect))
 }
 
 setInterval(() => {
